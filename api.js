@@ -20,7 +20,6 @@ app.use(cors());
 
 app.get("/vacas", Vaca.list);
 app.get("/vacas/desactivadas", Vaca.listDelete);
-// app.get("/vacas/diio/:diio", Vaca.getByDiio); // Obtener vaca por DIIO
 app.get("/vacas/:id", Vaca.getById); // Obtener vaca por ID
 app.post("/vacas", Vaca.create);
 app.put("/vacas/:id", Vaca.update);

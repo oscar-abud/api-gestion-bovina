@@ -13,7 +13,9 @@ const Vaca = {
 
       const vacas = await Vacas.find(filter);
       if (vacas.length === 0) {
-        return res.status(404).send("No hay vacas registradas");
+        return res
+          .status(404)
+          .send("No hay vacas registradas con esos filtros");
       }
       res.status(200).send(vacas);
     } catch (error) {
