@@ -26,6 +26,11 @@ app.put("/vacas/:id", Vaca.update);
 app.patch("/vacas/:id", Vaca.update);
 app.delete("/vacas/:id", Vaca.destroy);
 
+// 404
+app.use((req, res) => {
+  res.status(404).send({ message: "Endpoint no encontrado" });
+});
+
 // Iniciando el servidor
 app.listen(port, () => {
   console.log(`Listen on port: ${port}`);
