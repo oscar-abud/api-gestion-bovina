@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 // Modelos de datos
 const Vaca = require("./controller/vaca.controller");
+const { Auth, isAuthenticated } = require("./controller/auth.controller");
 const port = 3000;
 const cors = require("cors");
 // conectandose a MONGODB
@@ -18,13 +19,31 @@ mongoose
 app.use(express.json());
 app.use(cors());
 
-app.get("/vacas", Vaca.list);
-app.get("/vacas/desactivadas", Vaca.listDelete);
-app.get("/vacas/:id", Vaca.getById); // Obtener vaca por ID
-app.post("/vacas", Vaca.create);
-app.put("/vacas/:id", Vaca.update);
-app.patch("/vacas/:id", Vaca.update);
-app.delete("/vacas/:id", Vaca.destroy);
+// API PARA LAS VACAS
+app.get("/vacas", isAuthenticated, Vaca.list);
+app.get("/vacas/desactivadas", isAuthenticated, Vaca.listDelete);
+app.get("/vacas/:id", isAuthenticated, Vaca.getById); // Obtener vaca por ID
+app.post("/vacas", isAuthenticated, Vaca.create);
+app.put("/vacas/:id", isAuthenticated, Vaca.update);
+app.patch("/vacas/:id", isAuthenticated, Vaca.update);
+app.delete("/vacas/:id", isAuthenticated, Vaca.destroy);
+
+// API PARA EL USUARIO LOGIN Y REGISTER
+app.post("/login", Auth.login);
+app.post("/register", Auth.register);
+
+// Middleware de manejo de errores (incluye errores de express-jwt)
+app.use((err, req, res, next) => {
+  // Errores de autenticación de express-jwt
+  if (err.name === "UnauthorizedError") {
+    return res
+      .status(401)
+      .json({ message: "No estás autorizado. Token inválido o ausente." });
+  }
+
+  console.error("Error no controlado:", err);
+  res.status(500).json({ message: "Error interno del servidor" });
+});
 
 // 404
 app.use((req, res) => {
