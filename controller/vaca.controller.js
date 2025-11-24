@@ -73,9 +73,12 @@ const Vaca = {
       await newVaca.save();
       res
         .status(201)
-        .send(`¡Vaca con DIIO '${newVaca.diio}' creada con éxito!`);
+        .json(newVaca);
     } catch (error) {
-      res.status(500).send("Error al crear la vaca");
+      res.status(500).json({
+        error: "Error al crear la vaca",
+        details: error.message
+      });
       console.error(error);
     }
   },
