@@ -94,9 +94,13 @@ const Vaca = {
       }
       Object.assign(vacaExist, req.body);
       await vacaExist.save();
-      res.status(201).send(`¡Vaca con DIIO ${id} actualizada con éxito!`);
+      res.status(201)
+        .json(vacaExist);
     } catch (error) {
-      res.status(500).send("Error al actualizar la vaca");
+      res.status(500).json({
+        error: "Error al crear la vaca",
+        details: error.message
+      });
       console.error(error);
     }
   },
