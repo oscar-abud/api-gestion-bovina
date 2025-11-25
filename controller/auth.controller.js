@@ -8,7 +8,7 @@ const SECRETO = "MI_SECRETO_ULTRA_SEGURO_123";
 
 const validateJwt = expressjwt({ secret: SECRETO, algorithms: ["HS256"] });
 
-const signToken = (_id) => jwt.sign({ _id }, SECRETO);
+const signToken = (_id) => jwt.sign({ _id }, SECRETO, { expiresIn: "1h" });
 
 const findAndAssignUser = async (req, res, next) => {
   try {
