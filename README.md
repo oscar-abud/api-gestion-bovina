@@ -96,6 +96,7 @@ POST /register — Registrar nuevo usuario
 Todos requieren enviar "Authorization: Bearer <token>"
 
 GET /vacas — Listar vacas activas
+GET /vacas/all — Listar todas las vacas activas e inactivas
 GET /vacas/desactivadas — Listar vacas eliminadas
 GET /vacas/:id — Obtener vaca por ID
 POST /vacas — Crear vaca
