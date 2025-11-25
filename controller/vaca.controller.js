@@ -60,6 +60,21 @@ const Vaca = {
       console.error(error);
     }
   },
+  getAll: async (req, res) => {
+    try {
+
+      const vacas = await Vacas.find();
+
+      res.status(200).send(vacas)
+      
+    } catch (error) {
+      res.status(500).json({
+        error: "Error al crear la vaca",
+        details: error.message
+      });
+      console.error(error);
+    }
+  },
   create: async (req, res) => {
     try {
       const newVaca = new Vacas(req.body);

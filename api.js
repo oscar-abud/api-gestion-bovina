@@ -21,6 +21,7 @@ app.use(cors());
 
 // API PARA LAS VACAS
 app.get("/vacas", isAuthenticated, Vaca.list);
+app.get("/vacas/all", isAuthenticated, Vaca.getAll);
 app.get("/vacas/desactivadas", isAuthenticated, Vaca.listDelete);
 app.get("/vacas/:id", isAuthenticated, Vaca.getById); // Obtener vaca por ID
 app.post("/vacas", isAuthenticated, Vaca.create);
