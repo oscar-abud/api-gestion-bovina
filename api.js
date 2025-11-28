@@ -1,11 +1,16 @@
 const express = require("express");
 const app = express();
-// Modelos de datos
-const Vaca = require("./controller/vaca.controller");
-const { Auth, isAuthenticated } = require("./controller/auth.controller");
-const port = 3000;
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpecs = require("./swagger.config");
 const cors = require("cors");
-// conectandose a MONGODB
+
+// Importar rutas
+const authRoutes = require("./routes/auth.routes");
+const vacaRoutes = require("./routes/vaca.routes");
+
+const port = 3000;
+
+// Conectando a MongoDB
 const mongoose = require("mongoose");
 
 mongoose
@@ -13,27 +18,23 @@ mongoose
     "mongodb+srv://oscpalma_db_user:5RHAgojUjiOnGNQE@cluster0.a60lnid.mongodb.net/gestion-bovina?appName=Cluster0"
   )
   .then(() => console.log("Conectado a MongoDB"))
-  .catch((error) => console.error("Error al conectar a MongoDB: ", error));
+  .catch((error) => console.error("✗ Error al conectar a MongoDB:", error));
 
-// Middleware para procesar JSON
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-// API PARA LAS VACAS
-app.get("/vacas", isAuthenticated, Vaca.list);
-app.get("/vacas/all", isAuthenticated, Vaca.getAll);
-app.get("/vacas/desactivadas", isAuthenticated, Vaca.listDelete);
-app.get("/vacas/:id", isAuthenticated, Vaca.getById); // Obtener vaca por ID
-app.post("/vacas", isAuthenticated, Vaca.create);
-app.put("/vacas/:id", isAuthenticated, Vaca.update);
-app.patch("/vacas/:id", isAuthenticated, Vaca.update);
-app.delete("/vacas/:id", isAuthenticated, Vaca.destroy);
+// Swagger Documentation
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: "API Gestión Bovina"
+}));
 
-// API PARA EL USUARIO LOGIN Y REGISTER
-app.post("/login", Auth.login);
-app.post("/register", Auth.register);
+// Rutas
+app.use("/", authRoutes);
+app.use("/vacas", vacaRoutes);
 
-// Middleware de manejo de errores (incluye errores de express-jwt)
+// Middleware de manejo de errores
 app.use((err, req, res, next) => {
   // Errores de autenticación de express-jwt
   if (err.name === "UnauthorizedError") {
@@ -48,10 +49,11 @@ app.use((err, req, res, next) => {
 
 // 404
 app.use((req, res) => {
-  res.status(404).send({ message: "Endpoint no encontrado" });
+  res.status(404).json({ message: "Endpoint no encontrado" });
 });
 
 // Iniciando el servidor
 app.listen(port, () => {
   console.log(`Listen on port: ${port}`);
+  console.log(`Swagger: http://localhost:${port}/api-docs\n`);
 });
