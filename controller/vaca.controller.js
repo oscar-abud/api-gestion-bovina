@@ -17,7 +17,7 @@ const Vaca = {
           .status(404)
           .send("No hay vacas registradas con esos filtros");
       }
-      res.status(200).send(vacas);
+      res.status(200).json(vacas);
     } catch (error) {
       res.status(500).send("Error al obtener las vacas");
       console.error(error);
@@ -37,7 +37,7 @@ const Vaca = {
       if (vacasEliminadas.length === 0) {
         return res.status(404).send("No hay vacas eliminadas");
       }
-      res.status(200).send(vacasEliminadas);
+      res.status(200).json(vacasEliminadas);
     } catch (error) {
       res.status(500).send("Error al obtener las vacas eliminadas");
       console.error(error);
@@ -54,7 +54,7 @@ const Vaca = {
       if (!vaca) {
         return res.status(404).send(`No se encontró la vaca con ID '${id}'`);
       }
-      res.status(200).send(vaca);
+      res.status(200).json(vaca);
     } catch (error) {
       res.status(500).send("Error al obtener la vaca por ID");
       console.error(error);
@@ -65,7 +65,7 @@ const Vaca = {
 
       const vacas = await Vacas.find();
 
-      res.status(200).send(vacas)
+      res.status(200).json(vacas)
       
     } catch (error) {
       res.status(500).json({
@@ -109,8 +109,8 @@ const Vaca = {
       }
       Object.assign(vacaExist, req.body);
       await vacaExist.save();
-      res.status(201)
-        .json(vacaExist);
+      res.status(201).json(vacaExist);
+      
     } catch (error) {
       res.status(500).json({
         error: "Error al crear la vaca",
