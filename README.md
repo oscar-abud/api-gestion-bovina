@@ -19,6 +19,8 @@ El sistema utiliza middleware personalizados y de terceros para manejar solicitu
 - jsonwebtoken (generación de tokens JWT)
 - express-jwt (validación de tokens)
 - cors
+- Swagger UI Express
+- swagger-jsdoc
 
 ---
 
@@ -71,7 +73,7 @@ npm install express mongoose cors bcrypt jsonwebtoken express-jwt
 
 Para iniciar el servidor:
 
-node api.js
+npm start
 
 El archivo api.js contiene la configuración del servidor, la conexión a MongoDB y todos los endpoints del sistema.
 
