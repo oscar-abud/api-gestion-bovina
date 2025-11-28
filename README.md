@@ -80,7 +80,7 @@ El archivo api.js contiene la configuración del servidor, la conexión a MongoD
 Al iniciar se mostrará:
 
 Listen on port: 3000
-Swagger: http://localhost:3000/api-docs\n
+Swagger: http://localhost:3000/api-docs
 Conectado a MongoDB
 
 ---
