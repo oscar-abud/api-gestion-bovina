@@ -113,5 +113,4 @@ DELETE /vacas/:id — Dar de baja una vaca (baja lógica)
 - La API implementa baja lógica en vez de eliminar registros.
 - Toda la funcionalidad de vacas está protegida mediante JWT.
 - El proyecto está estructurado de forma simple y escalable.
-
 ---
