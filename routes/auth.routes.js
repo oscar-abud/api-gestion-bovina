@@ -25,7 +25,6 @@ const { Auth } = require("../controller/auth.controller");
  *       required:
  *         - email
  *         - password
- *         - nombre
  *         - rol
  *       properties:
  *         email:
@@ -36,9 +35,6 @@ const { Auth } = require("../controller/auth.controller");
  *           type: string
  *           format: password
  *           example: password123
- *         nombre:
- *           type: string
- *           example: Juan Pérez
  *         rol;:
  *           type: string
  *           example: administrador
