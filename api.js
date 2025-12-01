@@ -55,5 +55,5 @@ app.use((req, res) => {
 app.listen(port, () => {
   console.log(`Listen on port: ${port}`);
   // console.log(`Swagger: http://localhost:${port}/api-docs\n`);
-  console.log(`Swagger: https://api-gestion-bovina.onrender.com/api-docs/n`);
+  console.log(`Swagger: https://api-gestion-bovina.onrender.com/api-docs\n`);
 });
