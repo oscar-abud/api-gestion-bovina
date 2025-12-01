@@ -8,7 +8,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/auth.routes");
 const vacaRoutes = require("./routes/vaca.routes");
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Conectando a MongoDB
 const mongoose = require("mongoose");
