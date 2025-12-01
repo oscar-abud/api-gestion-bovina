@@ -15,7 +15,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(
-    "mongodb+srv://oscpalma_db_user:5RHAgojUjiOnGNQE@cluster0.a60lnid.mongodb.net/gestion-bovina?appName=Cluster0"
+    "mongodb+srv://oscpalma_db_user:F0398OJZYDSXT8Im@cluster0.a60lnid.mongodb.net/gestion-bovina?retryWrites=true&w=majority&appName=Cluster0"
   )
   .then(() => console.log("Conectado a MongoDB"))
   .catch((error) => console.error("✗ Error al conectar a MongoDB:", error));
