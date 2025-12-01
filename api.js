@@ -12,11 +12,10 @@ const port = process.env.PORT || 3000;
 
 // Conectando a MongoDB
 const mongoose = require("mongoose");
+const uri = "mongodb+srv://oscpalma_db_user:soyLaPass123456@cluster0.a60lnid.mongodb.net/gestion-bovina?retryWrites=true&w=majority&appName=Cluster0"
 
 mongoose
-  .connect(
-    "mongodb+srv://oscpalma_db_user:F0398OJZYDSXT8Im@cluster0.a60lnid.mongodb.net/gestion-bovina?appName=Cluster0"
-  )
+  .connect(uri)
   .then(() => console.log("Conectado a MongoDB"))
   .catch((error) => console.error("✗ Error al conectar a MongoDB:", error));
 
